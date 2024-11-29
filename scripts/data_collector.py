@@ -1,6 +1,7 @@
 import requests
 import csv
 import logging
+from datetime import datetime
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -14,7 +15,9 @@ logger = logging.getLogger(__name__)
 
 # item codes https://www.runelocus.com/tools/osrs-item-id-list/
 def collect_data():
-    item_list = list(range(554, 567)) #Runes
+    item_list = list(range(560, 567)) #Runes
+    item_list.extend([2353, 440])
+    print(item_list)
     data_dict = {}
     labels = ["timestamp"]
     
@@ -69,7 +72,8 @@ def request_item_catalogue_name_data(id, labels):
         logger.error(f"Error getting catalogue data for {id}: {e}")
 
 def write_to_csv(data: list, labels: list[str]):
-    filename = "./data/raw/price_data.csv"
+    curr_date = datetime.now().strftime("%Y-%b-%d")
+    filename = f"./data/raw/price_data_{curr_date}.csv"
     try:
         with open(filename, "w", newline="") as file:
             writer = csv.writer(file)
@@ -78,4 +82,6 @@ def write_to_csv(data: list, labels: list[str]):
     except Exception as e:
         logger.error(f"Error writing data csv: {e}")
 
+print("started collecting data")
 collect_data()
+print("finished collecting data.")
