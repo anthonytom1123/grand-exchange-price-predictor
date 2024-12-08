@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 # item codes https://www.runelocus.com/tools/osrs-item-id-list/
 def collect_data():
     item_list = list(range(560, 567)) #Runes
-    item_list.extend([2353, 440])
+    item_list.extend([2, 2353, 314, 440, 444, 447, 449, 453, 888, 890, 892, 1515, 1987, 1993, 2357, 7936])
     print(item_list)
     data_dict = {}
     labels = ["timestamp"]
